@@ -1,4 +1,4 @@
-from .database import connect_db
+from database import connect_db
 
 
 def create_booking(customer_id, vehicle_id, service_name, booking_date):
