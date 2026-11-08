@@ -1,4 +1,4 @@
-from .database import connect_db
+from database import connect_db
 
 
 def add_vehicle(customer_id, car_name, model, registration_number):
