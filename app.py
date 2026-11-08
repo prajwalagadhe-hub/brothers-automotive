@@ -591,7 +591,7 @@ def contact():
     st.write("📍 Address:Sangamner-Akole road,near manas beer bar and restro Tel-sangamner 422605")
     st.write("📞 Phone:7558492095 ")
     st.markdown(
-    "[💬 Chat with us on WhatsApp](https://wa.me/917558492095)"
+    "[💬 Chat with us on WhatsApp](https://wa.me/7558492095)"
 )
     st.write("✉️ Email: brothersautomotive@email.com")
 
@@ -624,7 +624,7 @@ def contact():
         "Connect with Brothers Automotive directly."
     )
 
-    WHATSAPP_NUMBER = "7558492059"
+    WHATSAPP_NUMBER = "7558492095"
 
     MESSAGE = (
         "Hello Brothers Automotive! "
