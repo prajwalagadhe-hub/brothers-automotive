@@ -1,6 +1,6 @@
 from pathlib import Path
 from uuid import uuid4
-from .database import connect_db
+from database import connect_db
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_DIR = BASE_DIR / "uploads" / "inspections"
