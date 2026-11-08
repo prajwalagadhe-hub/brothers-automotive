@@ -590,6 +590,9 @@ def contact():
 
     st.write("📍 Address:Sangamner-Akole road,near manas beer bar and restro Tel-sangamner 422605")
     st.write("📞 Phone:7558492095 ")
+    st.markdown(
+    "[💬 Chat with us on WhatsApp](https://wa.me/917558492095)"
+)
     st.write("✉️ Email: brothersautomotive@email.com")
 
     st.markdown("---")
@@ -865,43 +868,4 @@ selected_page = st.navigation(
 )
 
 selected_page.run()
-# ==============================
-# RESPONSIVE MOBILE NAVIGATION
-# ==============================
 
-pages = [
-    "Home",
-    "Services",
-    "AI Inspection",
-    "Book a Service",
-    "About Us",
-    "Contact Us",
-    "Admin"
-]
-
-selected_page = st.selectbox(
-    "☰ Navigate to Page",
-    pages,
-    key="mobile_navigation"
-)
-
-if selected_page == "Home":
-    home()
-
-elif selected_page == "Services":
-    services()
-
-elif selected_page == "AI Inspection":
-   ai_inspection()
-
-elif selected_page == "Book a Service":
-    booking()
-
-elif selected_page == "About Us":
-    about()
-
-elif selected_page == "Contact Us":
-    contact()
-
-elif selected_page == "Admin":
-    admin()
