@@ -590,9 +590,6 @@ def contact():
 
     st.write("📍 Address:Sangamner-Akole road,near manas beer bar and restro Tel-sangamner 422605")
     st.write("📞 Phone:7558492095 ")
-    st.markdown(
-    "[💬 Chat with us on WhatsApp](https://wa.me/7558492095)"
-)
     st.write("✉️ Email: brothersautomotive@email.com")
 
     st.markdown("---")
