@@ -1,11 +1,10 @@
-from backend.admin import admin
-from backend.database import connect_db
-from backend.booking import delete_booking
-from backend.database import create_tables
-from backend.customers import register_customer, get_customers
-from backend.vehicles import add_vehicle, get_vehicles
-from backend.services import add_service, get_services
-from backend.booking import create_booking, get_bookings
+from admin import admin
+from database import connect_db, create_tables
+from booking import delete_booking, create_booking, get_bookings
+from customers import register_customer, get_customers
+from vehicles import add_vehicle, get_vehicles
+from services import add_service, get_services
+
 import streamlit as st
 import sqlite3
 import os
