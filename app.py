@@ -950,5 +950,36 @@ selected_page = st.navigation(
     position="top"
 )
 
+st.markdown("""
+<style>
+
+/* Navigation buttons */
+.stButton > button {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2px solid #FFFFFF !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 12px 20px !important;
+    width: 100%;
+    transition: 0.3s ease;
+}
+
+/* Hover effect */
+.stButton > button:hover {
+    background-color: #222222 !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+}
+
+/* Sidebar background */
+[data-testid="stSidebar"] {
+    background-color: #000000 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 selected_page.run()
 
