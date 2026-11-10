@@ -27,6 +27,61 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="collapsed"
 )
+st.markdown("""
+<style>
+
+/* Main website background */
+.stApp {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+/* All headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #FFFFFF !important;
+}
+
+/* Normal text */
+p, label, span {
+    color: #E5E5E5;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background-color: #111111;
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #FFFFFF;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Button hover */
+.stButton > button:hover {
+    background-color: #CCCCCC;
+    color: #000000;
+}
+
+/* Input fields */
+.stTextInput input,
+.stTextArea textarea {
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+
+/* Links */
+a {
+    color: #FFFFFF !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 
 create_tables()
 
