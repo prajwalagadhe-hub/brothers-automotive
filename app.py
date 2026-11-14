@@ -1,3 +1,4 @@
+from pathlib import Path
 from admin import admin
 from database import connect_db, create_tables
 from booking import delete_booking, create_booking, get_bookings
@@ -406,24 +407,63 @@ def services():
          "Routine vehicle maintenance and inspection.")
     ]
 
-    for i in range(0, len(service_list), 3):
+    # Service images folder
+image_folder = Path(__file__).parent / "images"
 
-        cols = st.columns(3)
+image_files = list(image_folder.glob("*"))
 
-        for j, col in enumerate(cols):
+# Match photos to services
+image_keywords = {
+    "Car Washing": ["carwash"],
+    "Car Detailing": ["polishing", "detailing"],
+    "Car Coating": ["coating", "ceramic"],
+    "Paint Protection": ["paint", "protection"],
+    "General Maintenance": ["repair", "maintenance"]
+}
 
-            if i + j < len(service_list):
+for i in range(0, len(service_list), 3):
 
-                icon, name, description = service_list[i + j]
+    cols = st.columns(3)
 
-                with col:
-                    st.markdown(f"""
+    for j, col in enumerate(cols):
+
+        index = i + j
+
+        if index < len(service_list):
+
+            icon, name, description = service_list[index]
+
+            with col:
+
+                # Find matching image
+                keywords = image_keywords.get(name, [])
+
+                photo = next(
+                    (
+                        file for file in image_files
+                        if file.suffix.lower() in
+                        [".jpg", ".jpeg", ".png", ".webp"]
+                        and any(word in file.name.lower()
+                                for word in keywords)
+                    ),
+                    None
+                )
+
+                # Show photo
+                if photo:
+                    st.image(
+                        str(photo),
+                        use_container_width=True
+                    )
+
+                # Service card
+                st.markdown(f"""
                     <div class="service-card">
                         <h2>{icon}</h2>
                         <h3>{name}</h3>
                         <p>{description}</p>
                     </div>
-                    """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
                    
     st.info("Choose Book a Service from the navigation menu to request an appointment.")
 
