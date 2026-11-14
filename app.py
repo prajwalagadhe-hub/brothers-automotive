@@ -378,17 +378,78 @@ def home():
 # ==========================================
 # SERVICES PAGE
 # ==========================================
-
 def services():
 
     header()
 
-    st.title("OUR SERVICES")
+    # =====================================
+    # SERVICE PAGE DESIGN
+    # =====================================
 
-    st.write("Explore our automotive care services.")
+    st.markdown("""
+    <style>
+
+    .service-heading {
+        text-align: center;
+        color: #D4AF37;
+        font-size: 38px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .service-subheading {
+        text-align: center;
+        color: #cccccc;
+        font-size: 17px;
+        margin-bottom: 35px;
+    }
+
+    .service-card {
+        background: #151515;
+        border: 1px solid #B89635;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        min-height: 150px;
+        margin-bottom: 25px;
+    }
+
+    .service-card h2 {
+        color: #D4AF37;
+        font-size: 25px;
+    }
+
+    .service-card h3 {
+        color: #D4AF37;
+        font-size: 21px;
+    }
+
+    .service-card p {
+        color: #eeeeee;
+        font-size: 15px;
+    }
+
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(
+        '<div class="service-heading">OUR SERVICES</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
+        '<div class="service-subheading">'
+        'Premium Automotive Care & Protection'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    # =====================================
+    # SERVICE LIST
+    # =====================================
 
     service_list = [
-        ("🚘", "Car Washing",
+        ("🚗", "Car Washing",
          "Exterior cleaning and interior cleaning."),
 
         ("✨", "Car Detailing",
@@ -407,89 +468,110 @@ def services():
          "Routine vehicle maintenance and inspection.")
     ]
 
-    # Service images folder
-image_folder = Path(__file__).parent / "images"
+    # =====================================
+    # LOAD IMAGES FROM GITHUB IMAGES FOLDER
+    # =====================================
 
-image_files = list(image_folder.glob("*"))
+    image_folder = Path(__file__).parent / "images"
 
-# Match photos to services
-image_keywords = {
-    "Car Washing": ["carwash"],
-    "Car Detailing": ["polishing", "detailing"],
-    "Car Coating": ["coating", "ceramic"],
-    "Paint Protection": ["paint", "protection"],
-    "General Maintenance": ["repair", "maintenance"]
-}
+    image_files = []
 
-for i in range(0, len(service_list), 3):
+    if image_folder.exists():
+        image_files = sorted([
+            f for f in image_folder.iterdir()
+            if f.suffix.lower() in
+            [".jpg", ".jpeg", ".png", ".webp"]
+        ])
 
-    cols = st.columns(3)
+    # Match available images by filename
+    image_keywords = {
+        "Car Washing": ["carwash", "wash"],
+        "Car Detailing": ["detailing", "detail"],
+        "Car Coating": ["coating", "ceramic"],
+        "Car Polishing": ["polishing", "polish"],
+        "Paint Protection": ["protection", "paint"],
+        "General Maintenance": ["repair", "maintenance"]
+    }
 
-    for j, col in enumerate(cols):
+    used_images = set()
 
-        index = i + j
+    # =====================================
+    # DISPLAY SERVICE CARDS
+    # =====================================
 
-        if index < len(service_list):
+    for i in range(0, len(service_list), 3):
 
-            icon, name, description = service_list[index]
+        cols = st.columns(3)
 
-            with col:
+        for j, col in enumerate(cols):
 
-                # Find matching image
-                keywords = image_keywords.get(name, [])
+            index = i + j
 
-                photo = next(
-                    (
-                        file for file in image_files
-                        if file.suffix.lower() in
-                        [".jpg", ".jpeg", ".png", ".webp"]
-                        and any(word in file.name.lower()
-                                for word in keywords)
-                    ),
-                    None
-                )
+            if index < len(service_list):
 
-                # Show photo
-                if photo:
-                    st.image(
-                        str(photo),
-                        use_container_width=True
+                icon, name, description = service_list[index]
+
+                with col:
+
+                    keywords = image_keywords.get(name, [])
+
+                    photo = next(
+                        (
+                            file for file in image_files
+                            if file not in used_images
+                            and any(
+                                word in file.name.lower()
+                                for word in keywords
+                            )
+                        ),
+                        None
                     )
 
-                # Service card
-                st.markdown(f"""
+                    # Use another available image if no match
+                    if photo is None:
+                        photo = next(
+                            (
+                                file for file in image_files
+                                if file not in used_images
+                            ),
+                            None
+                        )
+
+                    if photo:
+                        used_images.add(photo)
+
+                        st.image(
+                            str(photo),
+                            use_container_width=True
+                        )
+                    else:
+                        st.info("Service image coming soon")
+
+                    st.markdown(f"""
                     <div class="service-card">
                         <h2>{icon}</h2>
                         <h3>{name}</h3>
                         <p>{description}</p>
                     </div>
-                """, unsafe_allow_html=True)
-                   
-    st.info("Choose Book a Service from the navigation menu to request an appointment.")
+                    """, unsafe_allow_html=True)
 
-    footer()
-    if "selected_service" in st.session_state:
+    # =====================================
+    # FOOTER
+    # =====================================
 
-        st.title("Book Your Service")
+    st.markdown("""
+    <div style="
+        text-align:center;
+        padding:25px;
+        color:#D4AF37;
+        border-top:1px solid #B89635;
+        margin-top:25px;
+    ">
+        <h3>BROTHERS AUTOMOTIVE</h3>
+        <p>Professional Care. Premium Protection.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.write(
-            f"Selected Service: {st.session_state['selected_service']}"
-        )
-
-        with st.form("booking_form"):
-
-            customer_name = st.text_input("Your Name")
-            phone = st.text_input("Phone Number")
-            car_name = st.text_input("Car Model")
-            booking_date = st.date_input("Booking Date")
-
-            submit = st.form_submit_button("Confirm Booking")
-
-            if submit:
-                if customer_name and phone and car_name:
-                    st.success("Booking request submitted successfully!")
-                else:
-                    st.warning("Please fill all details.")
 # ==========================================
 # AI CAR INSPECTION PAGE
 # ==========================================
