@@ -486,8 +486,8 @@ def services():
     # Match available images by filename
     image_keywords = {
         "Car Washing": ["carwash", "wash"],
-        "Car Detailing": ["detailing", "detail"],
         "Car Coating": ["coating", "ceramic"],
+        "Car Detailing": ["detailing", "detail"],
         "Car Polishing": ["polishing", "polish"],
         "Paint Protection": ["protection", "paint"],
         "General Maintenance": ["repair", "maintenance"]
