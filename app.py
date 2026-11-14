@@ -452,11 +452,11 @@ def services():
         ("🚗", "Car Washing",
          "Exterior cleaning and interior cleaning."),
 
-        ("✨", "Car Detailing",
-         "Detailed interior and exterior vehicle care."),
-
         ("💎", "Car Coating",
          "Paint protection and enhanced surface finish."),
+
+        ("✨", "Car Detailing",
+         "Detailed interior and exterior vehicle care."),
 
         ("🌟", "Car Polishing",
          "Paint finishing and surface enhancement."),
